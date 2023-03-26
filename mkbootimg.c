@@ -252,9 +252,9 @@ int main(int argc, char **argv)
     int header_version = 0;
     uint32_t pagesize        = 2048;
     uint32_t base            = 0x10000000U;
-    uint32_t kernel_offset   = 0xEC080100;
-    uint32_t ramdisk_offset  = 0x01000100;
-    uint32_t second_offset   = 0xECF00100;
+    uint32_t kernel_offset   = 0x00008000U;
+    uint32_t ramdisk_offset  = 0x01000000U;
+    uint32_t second_offset   = 0x00f00000U;
     uint32_t tags_offset     = 0x00000100U;
     uint64_t dtb_offset      = 0x01f00000U;
     uint64_t rec_dtbo_offset = 0;
