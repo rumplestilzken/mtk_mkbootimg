@@ -237,6 +237,9 @@ def get_unmkbootimg_commands_from_settings_offsets(path, commands):
             line_size = len(line_fragments)
             commands[PackArgument.second_offset] = pack_cmd_dict.get(PackArgument.second_offset) + " " + \
                 convert_to_decimal(line_fragments[line_size - 1])
+        if line.startswith("  mkbootimg"):
+            line_fragments = line.split("base")[1].split(" ")[1]
+            commands[PackArgument.base] = pack_cmd_dict.get(PackArgument.base) + " " + line_fragments
 
     return commands
 
@@ -280,10 +283,11 @@ def get_unmkbootimg_commands_from_settings(path):
             line_size = len(line_fragments)
             commands[PackArgument.cmdline] = pack_cmd_dict.get(PackArgument.cmdline) + " \"" + \
                 line_fragments[line_size - 2] + "\""
+
         commands[PackArgument.dtb] = pack_cmd_dict.get(PackArgument.dtb) + " <dtb.dtb>"
         commands[PackArgument.kernel] = pack_cmd_dict.get(PackArgument.kernel) + " <kernel>"
         commands[PackArgument.ramdisk] = pack_cmd_dict.get(PackArgument.ramdisk) + " <ramdisk>"
-        #TODO Get base from settings file
+
         commands = get_unmkbootimg_commands_from_settings_offsets(path, commands)
     return commands
 
