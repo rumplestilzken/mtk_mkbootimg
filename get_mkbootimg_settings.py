@@ -171,7 +171,7 @@ def get_unpack_bootimg_commands_from_settings(path):
         if line.startswith("kernel tags load address"):
             line_fragments = line.split(":")
             line_size = len(line_fragments)
-            commands[PackArgument.second_offset] = pack_cmd_dict.get(
+            commands[PackArgument.tags_offset] = pack_cmd_dict.get(
                 PackArgument.tags_offset) + " " + convert_to_decimal(
                 line_fragments[line_size - 1].strip())
         if line.startswith("page size"):
@@ -239,7 +239,7 @@ def get_unmkbootimg_commands_from_settings_offsets(path, commands):
                 convert_to_decimal(line_fragments[line_size - 1])
         if line.startswith("  mkbootimg"):
             line_fragments = line.split("base")[1].split(" ")[1]
-            commands[PackArgument.base] = pack_cmd_dict.get(PackArgument.base) + " " + line_fragments
+            commands[PackArgument.base] = pack_cmd_dict.get(PackArgument.base) + " " + convert_to_decimal(line_fragments)
 
     return commands
 
